@@ -21,3 +21,14 @@ const passwordList = [
     { times: '1-3', letter: 'b', password: 'cdefg'},
     { times: '2-9', letter: 'c', password: 'ccccccccc'}
 ];
+
+passwordList.forEach(passwordData => {
+    const occurrence = passwordData.password.split(passwordData.letter).length - 1;
+    const [min, max] = passwordData.times.split('-').map(Number);
+    if (min <= occurrence && occurrence <= max) {
+        console.log(`${passwordData.password} is VALID, ${passwordData.letter} is present ${occurrence} times and should have been present at least ${min} and at most ${max}`);
+    }
+    else {
+        console.log(`${passwordData.password} is INVALID, ${passwordData.letter} is present ${occurrence} times and should have been present at least ${min} and at most ${max}`);
+    }
+})
