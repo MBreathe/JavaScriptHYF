@@ -8,7 +8,6 @@ Once you have found those numbers, multiply the numbers and store the result of 
 
 
 const list = [1721, 979, 366, 299, 675, 1456];
-// Write your code here
 let result;
 list.forEach((num, inx) => {
     for (let i = inx++; i < list.length; i++) {

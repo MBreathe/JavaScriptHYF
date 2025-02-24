@@ -12,8 +12,9 @@ import { modules, students, mentors, classes } from "./hyf.js";
  *  [{ name: 'John', role: 'student' }, { name: 'Mary', role: 'mentor' }]
  */
 const getPeopleOfClass = (className) => {
-    // TODO complete this function
-    return students.filter(x => x.class.includes(className)).filter(y => y.graduated !== true).map(({ gitHubName, graduated, ...rest }) => rest);
+    return students.filter(x => x.class.includes(className))
+        .filter(y => y.graduated !== true)
+        .map(({ gitHubName, graduated, ...rest }) => rest);
 };
 // You can uncomment out this line to try your function
 console.log(getPeopleOfClass('class34'));
@@ -31,7 +32,6 @@ console.log(getPeopleOfClass('class34'));
  *  }
  */
 const getActiveClasses = () => {
-    // TODO complete this function
     let activeClassesList = classes.filter(x => x.active === true).map(x => x.name);
     let pplOfClass = activeClassesList.map(x => getPeopleOfClass(x));
     return pplOfClass.filter(x => x.length > 0);
