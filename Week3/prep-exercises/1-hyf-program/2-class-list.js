@@ -12,9 +12,15 @@ import { modules, students, mentors, classes } from "./hyf.js";
  *  [{ name: 'John', role: 'student' }, { name: 'Mary', role: 'mentor' }]
  */
 const getPeopleOfClass = (className) => {
-    return students.filter(x => x.class.includes(className))
-        .filter(y => y.graduated !== true)
-        .map(({ gitHubName, graduated, ...rest }) => rest);
+    let foundStudent = students.filter(x => x.class.includes(className))
+                   .filter(y => y.graduated !== true)
+                   .map(x => ({name: x.name}));
+    foundStudent.forEach(x => x.role = 'student');
+    let module = classes.filter(x => x.name.includes(className)).map(x => x.currentModule);
+    let foundMentor = mentors.filter(x => x.nowTeaching === module[0]).map(x => ({name: x.name}));
+    foundMentor.forEach(x => x.role = 'mentor');
+    let classComposition = [foundStudent[0], foundMentor[0]]
+    return classComposition
 };
 // You can uncomment out this line to try your function
 console.log(getPeopleOfClass('class34'));
@@ -32,12 +38,13 @@ console.log(getPeopleOfClass('class34'));
  *  }
  */
 const getActiveClasses = () => {
-    let activeClassesList = classes.filter(x => x.active === true).map(x => x.name);
-    let pplOfClass = activeClassesList.map(x => getPeopleOfClass(x));
-    return pplOfClass.filter(x => x.length > 0);
-
+    let activeClassesList = classes.filter(x => x.active === true)
+                                         .map(x => x.name);
+    let result = {};
+    activeClassesList.map(x => {
+        result[x] = getPeopleOfClass(x)
+    })
+    return result
 };
 // You can uncomment out this line to try your function
-// console.log(getActiveClasses());
-
 console.log(getActiveClasses());

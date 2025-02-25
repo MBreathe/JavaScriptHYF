@@ -8,7 +8,8 @@ import { modules, students, mentors, classes } from "./hyf.js";
  *  ['John', 'Mary']
  */
 const possibleMentorsForModule = (moduleName) => {
-    return mentors.filter(mentor => mentor.canTeach.includes(moduleName)).map(mentor => mentor.name);
+    return mentors.filter(mentor => mentor.canTeach.includes(moduleName))
+                  .map(mentor => mentor.name);
 };
 // You can uncomment out this line to try your function
 console.log(possibleMentorsForModule('using-apis'));
