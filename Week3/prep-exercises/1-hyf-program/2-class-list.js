@@ -14,11 +14,9 @@ import { modules, students, mentors, classes } from "./hyf.js";
 const getPeopleOfClass = (className) => {
     let foundStudent = students.filter(x => x.class.includes(className))
                    .filter(y => y.graduated !== true)
-                   .map(x => ({name: x.name}));
-    foundStudent.forEach(x => x.role = 'student');
+                   .map(x => ({name: x.name, role: 'student'}));
     let module = classes.filter(x => x.name.includes(className)).map(x => x.currentModule);
-    let foundMentor = mentors.filter(x => x.nowTeaching === module[0]).map(x => ({name: x.name}));
-    foundMentor.forEach(x => x.role = 'mentor');
+    let foundMentor = mentors.filter(x => x.nowTeaching === module[0]).map(x => ({name: x.name, role: 'mentor'}));
     let classComposition = [foundStudent[0], foundMentor[0]]
     return classComposition
 };
